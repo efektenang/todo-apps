@@ -120,6 +120,7 @@ function addTodo() {
 
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
+    alert('List telah ditambahkan!');
 }
 
 function addTaskToCompleted(todoId) {
@@ -128,16 +129,6 @@ function addTaskToCompleted(todoId) {
     if (todoTarget == null) return;
 
     todoTarget.isCompleted = true;
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
-}
-
-function removeTaskFromCompleted(todoId) {
-    const todoTarget = findTodoIndex(todoId);
-
-    if (todoTarget === -1) return;
-
-    todos.splice(todoTarget, 1);
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
 }
@@ -152,7 +143,15 @@ function undoTaskFromCompleted(todoId) {
     saveData();
 }
 
+function removeTaskFromCompleted(todoId) {
+    const todoTarget = findTodoIndex(todoId);
 
+    if (todoTarget === -1) return;
+
+    todos.splice(todoTarget, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const submitForm = document.getElementById('form');
